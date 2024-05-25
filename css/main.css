@@ -1,0 +1,38 @@
+body {
+    font-family: "Rubik Burned", system-ui;
+    box-sizing: border-box;
+}
+
+main {
+    margin-top: 45px;
+    padding: 0 100px;
+    display: flex;
+    justify-content: center;
+    flex-flow: column wrap;
+}
+
+#search-bar {
+    width: 400px;
+}
+
+#product-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 20px;
+}
+
+/* responsive */
+@media screen and (max-width: 720px) {
+    main {
+        padding: 0 auto;
+    }
+
+    #search-bar {
+        width: 200px;
+    }
+    
+    #product-list { 
+        grid-template-columns: auto auto;
+    }
+}

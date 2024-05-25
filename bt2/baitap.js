@@ -110,3 +110,4 @@ function mergeTable(table1, table2, columnKey) {
 
     return mergedTable;
 }
+
