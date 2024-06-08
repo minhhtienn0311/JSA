@@ -79,6 +79,7 @@ let i = 0;
  * NaN
  */
 
+
 let userInput = "";
 while (!userInput) {
     userInput = Number.parseInt(prompt("Age:"));
