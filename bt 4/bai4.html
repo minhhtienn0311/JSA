@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Trò chơi gõ từ</title>
+    <script>
+        // Danh sách các từ ngẫu nhiên
+        const words = ['chim', 'máy', 'trời', 'biển', 'sách'];
+        let currentWord = '';
+
+        // Hàm để chọn một từ ngẫu nhiên
+        function pickRandomWord() {
+            currentWord = words[Math.floor(Math.random() * words.length)];
+            document.getElementById('wordDisplay').textContent = currentWord;
+        }
+
+        // Hàm kiểm tra từ gõ vào
+        function checkInput(event) {
+            const inputChar = String.fromCharCode(event.keyCode).toLowerCase();
+            const wordToType = currentWord.split('');
+
+            if (inputChar === wordToType[0]) {
+                wordToType.shift();
+                currentWord = wordToType.join('');
+                document.getElementById('wordDisplay').textContent = currentWord;
+
+                if (currentWord === '') {
+                    alert('Bạn đã gõ đúng!');
+                    setTimeout(pickRandomWord, 500); // Độ trễ 0.5 giây
+                }
+            } else {
+                alert('Bạn đã gõ sai!');
+            }
+        }
+
+        // Khởi tạo trò chơi khi trang web tải xong
+        document.addEventListener('DOMContentLoaded', pickRandomWord);
+    </script>
+</head>
+
+<body>
+    <h1>Trò chơi gõ từ</h1>
+    <p id="wordDisplay"></p>
+    <script>
+        // Thêm sự kiện onkeypress vào toàn bộ trang web
+        document.body.onkeypress = checkInput;
+    </script>
+</body>
+
+</html>

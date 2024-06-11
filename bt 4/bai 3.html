@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hieu ung truot hinh</title>
+</head>
+
+<body>
+    <img id="slideShow" src="image1.jpg" alt="hinh anh 1">
+    <script>
+        const images = ["image1.jpg", "image2.jpg", "image3.jpg"];
+        let currentImage = 0;
+
+        setInterval(() => {
+            currentImage = (currentImage + 1) % images.length;
+            document.getElementById("slideShow").src = images[currentImage];
+        }, 3000);
+    </script>
+</body>
+
+</html>
