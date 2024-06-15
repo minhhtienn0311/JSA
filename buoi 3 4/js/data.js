@@ -8,6 +8,9 @@
 // symbol
 // kieu du lieu phuc tap
 // object
+
+import { deleteItem, editItem } from "./main.js";
+
 // array
 let products = {
   data: [
@@ -29,7 +32,7 @@ let products = {
       productName: "LEVENTS® TRAVEL TEE/ LIGHT BROWN",
       price: "35",
       image:
-        "https://product.hstatic.net/1000378196/product/z3466712209076_ae4321ce93b91a2070108a17a0654259__1__7f92c24d6bf748b5b765d90067d3377e_master.jpg",
+        "https://www.rothco.com/upload/product/product/6848-hr1.jpg",
     },
 
     {
@@ -77,7 +80,7 @@ let products = {
 };
 
 // ham tao card
-function createCard(name, price, img_link) {
+function createCard(name, price, img_link, id) {
   //card
   let card = document.createElement("div");
   card.classList.add("card");
@@ -111,12 +114,18 @@ function createCard(name, price, img_link) {
   edit_btn.classList.add("card-link");
   edit_btn.innerText = "Edit";
   edit_btn.href = "#";
+  edit_btn.addEventListener("clcik", () => {
+    editItem(id);
+  });
   card_body_2.appendChild(edit_btn);
   // delete btn
   let del_btn = document.createElement("a");
   del_btn.classList.add("card-link");
   del_btn.innerText = "Delete";
   del_btn.href = "#";
+  del_btn.addEventListener("click", () => {
+    deleteItem(id);
+  });
   card_body_2.appendChild(del_btn);
   card.appendChild(card_body_2);
 
@@ -124,9 +133,9 @@ function createCard(name, price, img_link) {
 }
 //vong lap tao danh sach card the tu khoa
 function getCardsBySearchKey(search_key) {
-    let results = [];
+  let results = [];
   // lay du lieu tu local storage
-  cards = JSON.parse(localStorage.getItem("cards"));
+  let cards = JSON.parse(localStorage.getItem("cards"));
   if (cards.length) {
     for (const obj of cards) {
       if (obj.productName.includes(search_key.toLowerCase())) {
@@ -143,16 +152,39 @@ function getCardsBySearchKey(search_key) {
     // alert error
     alert("No data");
   }
-return results;
+  return results;
 }
 
 //luu du lieu vao local storage
-if (localStorage.getItem('cards')) {
-    // tao du lieu moi
-    localStorage.setItem(JSON.stringify(products.data));
+if (!localStorage.getItem("cards")) {
+  let list_card = [...products.data];
+  for (let id = 1; id < list_card.length; id++) {
+    list_card[id-1].id = id;
+  }
+  // tao du lieu moi
+  localStorage.setItem("cards", JSON.stringify(products.data));
 }
 
-document.querySelector('#search-bar input').addEventListener('input', () => {
-    const search_key = document.querySelector('#search-bar input');
-    getCardsBySearchKey(search_key.toUpperCase());
-})
+const product_list = document.getElementById("product-list");
+const storage_cards = JSON.parse(localStorage.getItem("cards"));
+storage_cards.forEach((card) => {
+  const c = createCard(card.productName, card.price, card.image, card.id);
+  product_list.appendChild(c);
+});
+
+document.querySelector("#search-bar input").addEventListener("input", () => {
+  const search_key = document.querySelector("#search-bar input");
+  const search_list = getCardsBySearchKey(search_key.toUpperCase());
+  if (search_list?.length) {
+    product_list.innerHTML = "";
+    while (product_list.hasChildNodes()) {
+      product_list.removeChild(product_list.firstChild);
+    }
+    search_list.forEach((card) => {
+      const c = createCard(card.productName, card.price, card.image);
+      product_list.appendChild(c);
+    });
+  } else {
+    alert("Khong co du lieu phu hop");
+  }
+});
