@@ -1,0 +1,58 @@
+.popup {
+    /* display: none; */
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    z-index: 1000;
+}
+
+.popup .show {
+    display: block;
+}
+
+.popup-header {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.popup-body {
+    /* xuong dong cho cac label */
+    display: block;
+    font-size: 15px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.popup-body input {
+    border-radius: 10px;
+    width: calc(100% - 10px);
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border: 1px solid whitesmoke;
+}
+
+.form-actions {
+    width: calc(100% - 10px);
+    text-align: right;
+}
+
+.form-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+}
+
+.form-actions button[type='submit'] {
+    background-color: aquamarine;
+}
