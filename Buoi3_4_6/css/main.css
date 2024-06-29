@@ -1,0 +1,40 @@
+body {
+  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+  box-sizing: border-box;
+}
+
+main {
+  margin-top: 45px;
+  padding: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#search-bar {
+  width: 400px;
+}
+
+#product-list, #user-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 20px;
+  padding: 0 40px;
+}
+
+#user-list {
+  display: block;
+}
+
+/* responsive */
+@media screen and (max-width: 720px) {
+  #search-bar {
+    width: 400px;
+  }
+
+  #product-list {
+    grid-template-columns: auto auto;
+    padding: 0 10px;
+  }
+}
